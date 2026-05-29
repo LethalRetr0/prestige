@@ -1,14 +1,15 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
 import { HapticTab } from '@/components/haptic-tab';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Tabs } from 'expo-router';
+import React from 'react';
+import { Image } from 'react-native';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
+  
   return (
     <Tabs
       screenOptions={{
@@ -24,12 +25,24 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="stats"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Stats',
+          tabBarIcon: () => (
+            <Image
+              source={
+                colorScheme === 'dark'
+                  ? require("../../assets/images/StatsDark.png")
+                  : require("../../assets/images/StatsLight.png")
+                }
+              style={{
+                width: 24,
+                height: 24,
+              }}
+            />
+          )
         }}
-      />
+        />
     </Tabs>
   );
 }
